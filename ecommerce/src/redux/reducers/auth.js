@@ -1,4 +1,4 @@
-import { SIGNUP_SUCCESS, SIGN_FAIL } from "../actions/types";
+import { SIGNUP_SUCCESS, SIGN_FAIL, AUTHENTICATED_SUCCESS, AUTHENTICATED_FAIL, SET_AUTH_LOADING, REMOVE_AUTH_LOADING } from "../actions/types";
 
 const initialState = {
     access : localStorage.getItem('access'),
@@ -8,18 +8,27 @@ const initialState = {
     loading: false
 }
 
-export default function(state = initialState, action){
+export default function Auth(state = initialState, action){
     const {type, payload} = action
     switch (type) {
+        case SET_AUTH_LOADING:
+            return {
+                ...state,
+                loading: true
+            }
+        case REMOVE_AUTH_LOADING:
+            return {
+                ...state,
+                loading: false
+            }
+        case AUTHENTICATED_SUCCESS:
+        case AUTHENTICATED_FAIL:
+            return {...state}
         case SIGNUP_SUCCESS:
         case SIGN_FAIL:
-            localStorage.removeItem('access')
-            localStorage.removeItem('refresh')
-            return{...state, access: null, refresh: null, isAuthenticated: false,
-                user: null,}
+            return{...state}
             
         default:
             return state;
     }
-
 }
