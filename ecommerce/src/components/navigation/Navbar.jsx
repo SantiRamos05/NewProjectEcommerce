@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import {BookmarkAltIcon,BriefcaseIcon, ChartBarIcon,CheckCircleIcon,CursorClickIcon,DesktopComputerIcon,GlobeAltIcon,InformationCircleIcon,
   MenuIcon,NewspaperIcon,OfficeBuildingIcon,PhoneIcon,PlayIcon,ShieldCheckIcon,UserGroupIcon,ViewGridIcon,XIcon,
@@ -8,6 +8,7 @@ import {BookmarkAltIcon,BriefcaseIcon, ChartBarIcon,CheckCircleIcon,CursorClickI
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import Alert from '../../components/Alert'
 import { connect } from 'react-redux';
+import { logout } from '../../redux/actions/auth'
 
 const solutions = [
   {
@@ -70,7 +71,19 @@ const blogPosts = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const Navbar = ({isAuthenticated, user}) => {
+const Navbar = ({isAuthenticated, user, logout}) => {
+
+  const [redirect, setRedirect] = useState(false);
+
+  const logoutHandler = () => {
+    logout()
+    setRedirect(true);
+  }
+
+  if (redirect){
+    window.location.reload(false)
+    return <Navigate to='/' />;
+  }
 
   const authLinks = (
     <Menu as="div" className="relative inline-block text-left">
@@ -114,6 +127,7 @@ const Navbar = ({isAuthenticated, user}) => {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={logoutHandler}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block w-full text-left px-4 py-2 text-sm'
@@ -470,5 +484,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps,{
-
+  logout
 }) (Navbar)

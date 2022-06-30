@@ -1,5 +1,5 @@
 import { SIGNUP_SUCCESS, SIGN_FAIL, ACTIVATION_SUCCESS, ACTIVATION_FAIL ,AUTHENTICATED_SUCCESS, AUTHENTICATED_FAIL, SET_AUTH_LOADING, REMOVE_AUTH_LOADING, LOGIN_SUCCESS,
-    LOGIN_FAIL, USER_LOADED_SUCCESS, USER_LOADED_FAIL, REFRESH_SUCCESS , REFRESH_FAIL} from "../actions/types";
+    LOGIN_FAIL, USER_LOADED_SUCCESS, USER_LOADED_FAIL, REFRESH_SUCCESS , REFRESH_FAIL, LOGOUT, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAIL, RESET_PASSWORD_CONFIRM_SUCCESS, RESET_PASSWORD_CONFIRM_FAIL,} from "../actions/types";
 
 const initialState = {
     access : localStorage.getItem('access'),
@@ -60,6 +60,10 @@ export default function Auth(state = initialState, action){
         
         case ACTIVATION_SUCCESS:
         case ACTIVATION_FAIL:
+        case RESET_PASSWORD_SUCCESS:
+        case RESET_PASSWORD_FAIL:
+        case RESET_PASSWORD_CONFIRM_SUCCESS:
+        case RESET_PASSWORD_CONFIRM_FAIL:
             return {...state}
 
         case REFRESH_SUCCESS:
@@ -68,10 +72,11 @@ export default function Auth(state = initialState, action){
                 ...state,
                 access: localStorage.getItem('access')
             }
-        case REFRESH_FAIL:
         case SIGNUP_SUCCESS:
         case SIGN_FAIL:
         case LOGIN_FAIL:
+        case REFRESH_FAIL:
+        case LOGOUT:
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             return {
