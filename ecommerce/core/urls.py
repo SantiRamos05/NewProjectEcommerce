@@ -7,10 +7,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
+    path('api/category/', include('apps.category.urls')),
     #path('auth/', include('djoser.social.urls')),
     #path('', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += [re_path(r'^.*',
-                        TemplateView.as_view(template_name='index.html'))]
+#urlpatterns += [re_path(r'^.*',
+                      #  TemplateView.as_view(template_name='index.html'))]

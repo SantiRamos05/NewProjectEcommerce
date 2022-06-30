@@ -1,3 +1,9 @@
+import Layout from '../../hooks/Layout'
+import { useState, useEffect } from 'react'
+import {connect} from 'react-redux'
+import { reset_password_confirm } from '../../redux/actions/auth'
+import {Oval} from 'react-loader-spinner'
+import {Navigate, useParams} from 'react-router-dom'
 
 const ResetPasswordConfirm = ({
   reset_password_confirm,

@@ -40,7 +40,7 @@ DJANGO_APPS = [
 
 
 PROJECT_APPS=[]
-ECOMMERCE_APPS=[]
+ECOMMERCE_APPS=['apps.category']
 THIRD_PARTY_APPS=[
     'corsheaders',
     'rest_framework',
@@ -83,7 +83,8 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        #'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,8 +92,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'social_django.context_processors.backends',
-                #'social_django.context_processors.login_redirect',
             ],
         },
     },
