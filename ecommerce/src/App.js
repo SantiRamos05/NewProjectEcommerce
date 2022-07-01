@@ -8,6 +8,7 @@ import ResetPasswordConfirm from './containers/auth/ResetPasswordConfirm';
 import Signup from './containers/auth/Signup';
 import Error404 from './containers/Error404';
 import Home from './containers/Home';
+import Shop from './containers/Shop';
 import store from './store'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/activate/:uid/:token" element={<Activate />}/>
           <Route path="/reset_password" element={<ResetPassword />}/>
           <Route path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirm />}/>
+          <Route path="/shop" element={<Shop />}/>
         </Routes>
       </BrowserRouter>
       
