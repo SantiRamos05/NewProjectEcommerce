@@ -1,10 +1,10 @@
 from dataclasses import field
 from rest_framework import serializers
-from .models import product
+from .models import Product
 
 class ProductSerialiazer(serializers.ModelSerializer):
     class Meta:
-        model = product
+        model = Product
         fields = [
             'id',
             'name',

@@ -90,22 +90,23 @@ export const get_product = (productId) => async dispatch => {
     try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/product/product/${productId}`, config);
 
-        if(res.data === 200){
+        if (res.status === 200) {
             dispatch({
                 type: GET_PRODUCT_SUCCESS,
                 payload: res.data
-            })
-        }else{
+            });
+        } else {
             dispatch({
                 type: GET_PRODUCT_FAIL
-            })
+            });
         }
-    } catch (error) {
+    } catch (err) {
         dispatch({
             type: GET_PRODUCT_FAIL
-        })
+        });
     }
 }
+
 
 export const get_related_products = (productId) => async dispatch => {
     const config = {

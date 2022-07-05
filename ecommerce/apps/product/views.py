@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 # Create your views here.
 
-from .models import product
+from .models import Product
 from .serializers import ProductSerialiazer
 from apps.category.models import Category
 from django.db.models import Q
@@ -21,10 +21,10 @@ class ProductDetailView(APIView):
                 {'error': 'Producto Id no es un entero'},
                 status=status.HTTP_404_NOT_FOUND)
 
-        if product.objects.filter(id=product_id).exists():
-            producto = product.objects.get(id=product_id)
-            producto = ProductSerialiazer(producto)
-            return Response({'product':producto.data}, status=status.HTTP_200_OK)
+        if Product.objects.filter(id=product_id).exists():
+            product = Product.objects.get(id=product_id)
+            product = ProductSerialiazer(product)
+            return Response({'product':product.data}, status=status.HTTP_200_OK)
         else:
             return Response(
                 {'error': 'Producto Id no es un entero'},
@@ -53,11 +53,11 @@ class ListProductsView(APIView):
             limit = 6
         if order == 'desc':
             sortBy = '-' + sortBy
-            products =product.objects.order_by(sortBy).all()[:int(limit)] 
+            products =Product.objects.order_by(sortBy).all()[:int(limit)] 
         elif order == 'asc':
-            products =product.objects.order_by(sortBy).all()[:int(limit)] 
+            products =Product.objects.order_by(sortBy).all()[:int(limit)] 
         else:
-            products = product.objects.order_by(sortBy).all()
+            products = Product.objects.order_by(sortBy).all()
         
         products = ProductSerialiazer(products, many=True)
         if products:
@@ -81,9 +81,9 @@ class ListSearchView(APIView):
 
         search = data['search']
         if len(search) == 0:
-            search_results = product.objects.order_by('-date_created').all()
+            search_results = Product.objects.order_by('-date_created').all()
         else:
-            search_results = product.objects.filter(Q(description__icontains=search) | Q(name__icontains=search))
+            search_results = Product.objects.filter(Q(description__icontains=search) | Q(name__icontains=search))
 
         if category_id == 0:
             search_results = ProductSerialiazer(search_results, many=True)
@@ -130,21 +130,21 @@ class ListRelatedView(APIView):
                 {'error': 'Category not found'},
                 status=status.HTTP_404_NOT_FOUND)
         
-        if not product.objects.filter(id=product_id).exists():
+        if not Product.objects.filter(id=product_id).exists():
             return Response(
                 {'error': 'Category not found'},
                 status=status.HTTP_404_NOT_FOUND)
             
-        category = product.objects.get(id=product_id).category
+        category = Product.objects.get(id=product_id).category
 
-        if product.objects.filter(category=category).exists():
+        if Product.objects.filter(category=category).exists():
             if category.parent:
-                related_products = product.objects.order_by(
+                related_products = Product.objects.order_by(
                     '-sold'
                 ).filter(category=category)
             else:
                 if not Category.objects.filter(parent=category).exists():
-                    related_products = product.objects.order_by(
+                    related_products = Product.objects.order_by(
                         '-sold'
                     ).filter(category=category)
                 
@@ -156,7 +156,7 @@ class ListRelatedView(APIView):
                         filtered_categories.append(cat)
 
                     filtered_categories = tuple(filtered_categories)
-                    related_products = product.objects.order_by(
+                    related_products = Product.objects.order_by(
                         '-sold'
                     ).filter(category__in=filtered_categories)
                 
@@ -204,7 +204,7 @@ class ListBySearchView(APIView):
 
         ## Si categoryID es = 0, filtrar todas las categorias
         if category_id == 0:
-            product_results = product.objects.all()
+            product_results = Product.objects.all()
         elif not Category.objects.filter(id=category_id).exists():
             return Response(
                 {'error': 'This category does not exist'},
@@ -213,10 +213,10 @@ class ListBySearchView(APIView):
             category = Category.objects.get(id=category_id)
             if category.parent:
                 # Si la categoria tiene padrem filtrar solo por la categoria y no el padre tambien
-                product_results = product.objects.filter(category=category)
+                product_results = Product.objects.filter(category=category)
             else:
                 if not Category.objects.filter(parent=category).exists():
-                    product_results = product.objects.filter(category=category)
+                    product_results = Product.objects.filter(category=category)
                 else:
                     categories = Category.objects.filter(parent=category)
                     filtered_categories = [category]
@@ -225,7 +225,7 @@ class ListBySearchView(APIView):
                         filtered_categories.append(cat)
 
                     filtered_categories = tuple(filtered_categories)
-                    product_results = product.objects.filter(category__in=filtered_categories)
+                    product_results = Product.objects.filter(category__in=filtered_categories)
             
             # Filtrar por precio
         if price_range == '1 - 19':

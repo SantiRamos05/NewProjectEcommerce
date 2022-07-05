@@ -7,7 +7,7 @@ from django.conf import settings
 
 domain = settings.DOMAIN
 
-class product(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=255)
     photo = models.ImageField(upload_to='photos/%Y/%m/')
     description = models.TextField()
