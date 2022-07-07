@@ -6,13 +6,8 @@ const SearchBox = ({categories, search, onChange, onSubmit,})=>{
             <form onSubmit={e => onSubmit(e)} className="text-base font-medium text-gray-500 hover:text-gray-900">
               <div>
                 <div className="mt-1 flex rounded-md shadow-sm border border-gray-200">
-                  
                 <div className="mt-1 mx-1 px-2 py-1">
-                    <select
-                        onChange={e => onChange(e)}
-                        name='category_id'
-                        className='rounded-full'
-                    >
+                    <select onChange={e => onChange(e)} name='category_id' className='rounded-full'>
                         <option value={0}>All</option>
                         {
                             categories && 
