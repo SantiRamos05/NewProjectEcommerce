@@ -9,6 +9,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('api/category/', include('apps.category.urls')),
     path('api/product/', include('apps.product.urls')),
+    path('api/cart/', include('apps.cart.urls')),
     #path('auth/', include('djoser.social.urls')),
     #path('', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),
