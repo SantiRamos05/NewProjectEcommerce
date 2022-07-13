@@ -1,6 +1,27 @@
-import {ADD_ITEM,GET_TOTAL,GET_ITEM_TOTAL,GET_ITEMS,UPDATE_ITEM,REMOVE_ITEM,EMPTY_CART,ADD_ITEM_SUCCESS,ADD_ITEM_FAIL,
-GET_TOTAL_SUCCESS,GET_TOTAL_FAIL,GET_ITEM_TOTAL_SUCCESS,GET_ITEM_TOTAL_FAIL,GET_ITEMS_SUCCESS,GET_ITEMS_FAIL,UPDATE_ITEM_SUCCESS,UPDATE_ITEM_FAIL,
-REMOVE_ITEM_SUCCESS,REMOVE_ITEM_FAIL,EMPTY_CART_SUCCESS,EMPTY_CART_FAIL,SYNCH_CART_SUCCESS,SYNCH_CART_FAIL,
+import {
+    ADD_ITEM,
+    GET_TOTAL,
+    GET_ITEM_TOTAL,
+    GET_ITEMS,
+    UPDATE_ITEM,
+    REMOVE_ITEM,
+    EMPTY_CART,
+    ADD_ITEM_SUCCESS,
+    ADD_ITEM_FAIL,
+    GET_TOTAL_SUCCESS,
+    GET_TOTAL_FAIL,
+    GET_ITEM_TOTAL_SUCCESS,
+    GET_ITEM_TOTAL_FAIL,
+    GET_ITEMS_SUCCESS,
+    GET_ITEMS_FAIL,
+    UPDATE_ITEM_SUCCESS,
+    UPDATE_ITEM_FAIL,
+    REMOVE_ITEM_SUCCESS,
+    REMOVE_ITEM_FAIL,
+    EMPTY_CART_SUCCESS,
+    EMPTY_CART_FAIL,
+    SYNCH_CART_SUCCESS,
+    SYNCH_CART_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -11,46 +32,46 @@ const initialState = {
 };
 
 export default function Cart(state = initialState, action) {
-    const {type, payload} = action
-    switch (type) {
-        case ADD_ITEM_SUCCESS:
-            return{
-                ...state,
-                items: payload.cart
-            }
-        case ADD_ITEM_FAIL:
-            return{
-                ...state,
-                items: null
-            }
-        case ADD_ITEM:
-            localStorage.setItem('cart', JSON.stringify(payload))
-            return{
-                ...state,
-                items: JSON.parse(localStorage.getItem('cart'))
-            }
+    const { type, payload } = action;
 
-        case GET_ITEMS_SUCCESS:
-            return{
+    switch(type) {
+        case ADD_ITEM_SUCCESS:
+            return {
                 ...state,
                 items: payload.cart
-            }
-        case GET_ITEMS_FAIL:
-            return{
+            };
+        case ADD_ITEM_FAIL:
+            return {
                 ...state,
                 items: null
-            }
-        case GET_ITEMS:
-            return{
+            };
+        case ADD_ITEM:
+            localStorage.setItem('cart', JSON.stringify(payload));
+            return {
                 ...state,
                 items: JSON.parse(localStorage.getItem('cart'))
-            }
+            };
+        case GET_ITEMS_SUCCESS:
+            return {
+                ...state,
+                items: payload.cart
+            };
+        case GET_ITEMS_FAIL:
+            return {
+                ...state,
+                items: null
+            };
+        case GET_ITEMS:
+            return {
+                ...state,
+                items: JSON.parse(localStorage.getItem('cart'))
+            };
         case GET_TOTAL_SUCCESS:
-            return{
+            return {
                 ...state,
                 amount: payload.total_cost,
                 compare_amount: payload.total_compare_cost
-            }
+            };
         case GET_TOTAL_FAIL:
             return {
                 ...state,
@@ -64,29 +85,29 @@ export default function Cart(state = initialState, action) {
                 compare_amount: payload[1]
             };
         case GET_ITEM_TOTAL_SUCCESS:
-            return{
+            return {
                 ...state,
                 total_items: payload.total_items
-            }
+            };
         case GET_ITEM_TOTAL_FAIL:
-            return{
+            return {
                 ...state,
                 total_items: 0
-            }
+            };
         case GET_ITEM_TOTAL:
-            return{
+            return {
                 ...state,
                 total_items: payload
-            }
+            };
         case UPDATE_ITEM_SUCCESS:
-            return{
+            return {
                 ...state,
                 items: payload.cart
-            }
+            };
         case UPDATE_ITEM_FAIL:
-            return{
+            return {
                 ...state
-            }
+            };
         case UPDATE_ITEM:
             localStorage.setItem('cart', JSON.stringify(payload));
             return {
@@ -132,6 +153,6 @@ export default function Cart(state = initialState, action) {
                 ...state
             };
         default:
-            return state
+            return state;
     }
 }
