@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/product/', include('apps.product.urls')),
     path('api/cart/', include('apps.cart.urls')),
     path('api/shipping/', include('apps.shipping.urls')),
+    path('api/orders/', include('apps.orders.urls')),
     #path('auth/', include('djoser.social.urls')),
     #path('', include('social_django.urls', namespace='social')),
     path('admin/', admin.site.urls),

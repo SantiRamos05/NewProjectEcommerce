@@ -9,6 +9,7 @@ import Signup from './containers/auth/Signup';
 import Error404 from './containers/Error404';
 import Home from './containers/Home';
 import Cart from './containers/pages/Cart';
+import Checkout from './containers/pages/Checkout';
 import ProductDetail from './containers/pages/ProductDetail';
 import Search from './containers/pages/Search';
 import Shop from './containers/Shop';
@@ -22,6 +23,7 @@ function App() {
           <Route path="*" element={<Error404 />}/>
           <Route path="/" element={<Home />}/>
           <Route path="/cart" element={<Cart />}/>
+          <Route path="/checkout" element={<Checkout />}/>
           {/*Autenticacion */}
           <Route path="/signup" element={<Signup />}/>
           <Route path="/login" element={<Login />}/>
