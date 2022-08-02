@@ -32,3 +32,4 @@ New Project Ecommerce... in Progress...
 -->pip install gunicorn<--
 -->pip install whitenoise<-->
 -->pip install requests<-->
+-->pip3 install mercadopago<-->

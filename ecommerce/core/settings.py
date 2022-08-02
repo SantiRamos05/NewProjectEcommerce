@@ -42,7 +42,7 @@ DJANGO_APPS = [
 
 
 PROJECT_APPS=[]
-ECOMMERCE_APPS=['apps.category','apps.product', 'apps.cart', 'apps.shipping', 'apps.orders']
+ECOMMERCE_APPS=['apps.category','apps.product', 'apps.cart', 'apps.shipping', 'apps.orders', 'apps.payment']
 THIRD_PARTY_APPS=[
     'corsheaders',
     'rest_framework',
@@ -234,6 +234,8 @@ DJOSER = {
     },
 }
 
+MP_PUBLIC_KEY=os.environ.get('MP_PUBLIC_KEY')
+MP_PRIVATE_KEY=os.environ.get('MP_PRIVATE_KEY')
 
 AUTH_USER_MODEL="user.UserAccount"
 
